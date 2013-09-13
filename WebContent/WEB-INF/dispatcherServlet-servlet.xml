@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       		http://www.springframework.org/schema/beans 	
+       		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    	<property name="mappings">
+    		<props>
+    			<prop key="hello.do">helloAction</prop>
+    			<prop key="hello2.do">helloController</prop>
+    		</props>
+    	</property>
+    </bean> 
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <bean name="/hello2.do" class="com.mercury.actions.HelloAction" autowire="byType">
+    	<property name="commandClass" value="com.mercury.beans.User"/>
+    	<property name="viewPage" value="result"/>
+    </bean>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="viewClass">
+    		<value>org.springframework.web.servlet.view.InternalResourceView</value>
+    	</property>
+    	<property name="prefix" value="/"/>
+    	<property name="suffix" value=".jsp"/>
+    </bean>
+    <bean id="helloAction" class="com.mercury.actions.HelloAction" autowire="byType">
+    	<property name="commandClass" value="com.mercury.beans.User"/>
+    	<property name="viewPage" value="result"/>
+    </bean>
+    <bean id="helloController" class="com.mercury.actions.HelloController" autowire="byType">
+    	<property name="viewPage" value="result"/>
+    </bean>
+    <bean id="helloService" class="com.mercury.services.HelloService" autowire="byType"/>
+    <bean id="helloDao" class="com.mercury.daos.HelloDao"/>
+</beans>
+
+
